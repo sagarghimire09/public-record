@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	
+    <title>DPR - Create Citizen</title>
+  </head>
+  <body>
+  	<div class="container-fluid">
+  		<div class="top-nav">
+  			<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+			  <a class="navbar-brand" th:href="@{/}">DPR</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			    <ul class="navbar-nav mr-auto">
+			      <li class="nav-item">
+			        <a class="nav-link" href="">States</a>
+			      </li>
+			      <li class="nav-item active">
+			        <a class="nav-link" th:href="@{/citizen/list}">Citizens</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">Profile</a>
+			      </li>
+			    </ul>
+			    <form class="form-inline my-2 my-lg-0">
+			      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			    </form>
+			  </div>
+			</nav>
+  		</div>
+  		
+
+	 <div class="row">
+	 	<div class="col-lg-12 col-md-12 col-sm-6">
+	 	 <h5 class="mb-1">Create New Citizen here :</h5>
+         <a th:href="@{/citizen/list}" class="btn btn-success" style="float: right; margin-bottom: 10px;">List Citizens</a>
+         <div style="padding-top:20px; margin-top:10px;">
+         	<hr>
+         	<form th:action="@{/citizen/save}" method="post" th:object="${citizen}">
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="ssn">SSN Number</label>&nbsp;
+			      <span class="error" th:if="${#fields.hasErrors('socialSecurityNumber')}" th:errors="*{socialSecurityNumber}"></span>
+			      <input type="text" class="form-control" name="socialSecurityNumber" id="ssn" th:value="${citizen.socialSecurityNumber}" placeholder="SSN Number" required>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="firstName">First Name</label>&nbsp;
+			      <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+			      <input type="text" class="form-control" name="firstName" id="firstName" th:value="${citizen.firstName}" placeholder="First Name" required>
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="middleName">Middle Name</label>
+			      <input type="text" class="form-control" name="middleName" id="middleName" th:value="${citizen.middleName}" placeholder="Middle Name">
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="lastName">Last Name</label>&nbsp;
+			      <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+			      <input type="text" class="form-control" name="lastName" id="lastName" th:value="${citizen.lastName}" placeholder="Last Name" required>
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="dob">Date of Birth</label>&nbsp;
+			      <span class="error" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+			      <input type="date" class="form-control" name="dateOfBirth" id="dob" th:value="${citizen.dateOfBirth}" placeholder="Date of Birth" required>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="income">Yearly Income</label>
+			      <input type="number" step=".01" class="form-control" name="yearlyIncome" id="income" th:value="${citizen.yearlyIncome}" placeholder="Yearly Income" required>
+			    </div>
+			  </div>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="income">Choose State</label>
+			      <select th:field="*{state}" class="form-control" required>
+			      	<option th:each="st : ${states}" th:value="${st.stateId}" th:text="${st.stateCode}"></option>
+			      </select>
+			    </div>
+			  </div>
+			  
+			  <button type="submit" class="btn btn-primary">Save</button>
+			</form>
+         </div>
+	 	</div>
+	 </div>
+	 
+	</div>
+	
+</body>
+</html>
