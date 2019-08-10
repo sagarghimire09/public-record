@@ -1,6 +1,5 @@
 package edu.mum.cs.publicrecord.service.impl;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class CitizenServiceImpl implements CitizenService {
 		for(Citizen c : citizens) {
 			totalIncome += c.getYearlyIncome();
 		}
-		return totalIncome;
+		return Math.floor(totalIncome*100)/100;
 	}
 
 }

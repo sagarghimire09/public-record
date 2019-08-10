@@ -9,11 +9,10 @@
   </head>
   <body>
   	 <section layout:fragment="content">
-  	 	<div class="row">
-		 	<div class="col-lg-12 col-md-12 col-sm-6">
+		 	<div class="col-lg-12 col-md-12 col-sm-6" style="margin-top: 20px">
 		 	 <h5 class="mb-1">Create New Citizen here :</h5>
-	         <a th:href="@{/citizen/list}" class="btn btn-success" style="float: right; margin-bottom: 10px;">List Citizens</a>
-	         <div style="padding-top:20px; margin-top:10px;">
+	         <a th:href="@{/citizen/list}" class="btn btn-success" style="float: right;">List Citizen</a>
+	         <div style="padding-top:20px; margin-top:15px;">
 	         	<hr>
 	         	<form th:action="@{/citizen/save}" method="post" th:object="${citizen}">
 				  <div class="form-row">
@@ -47,6 +46,7 @@
 				    </div>
 				    <div class="form-group col-md-6">
 				      <label for="income">Yearly Income</label>
+				      <span class="error" th:if="${#fields.hasErrors('yearlyIncome')}" th:errors="*{yearlyIncome}"></span>
 				      <input type="number" step=".01" class="form-control" name="yearlyIncome" id="income" th:value="${citizen.yearlyIncome}" placeholder="Yearly Income" required>
 				    </div>
 				  </div>
@@ -63,7 +63,6 @@
 				</form>
 	         </div>
 		 	</div>
-	 	</div>
   	 </section>
 	
 </body>
